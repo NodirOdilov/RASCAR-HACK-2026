@@ -1,0 +1,267 @@
+{
+ "file": "submissions/EVOLYUTSIYA_CASE1_E4_OPTIONAL.csv",
+ "sha256": "7f4c2569b820b899a4a9dd7621eb662369d2c50bef5e0a9137954667ec9c210a",
+ "bytes": 10869,
+ "model": "e4_e2x_one_to_one (E4 = E2X with its error probabilities conditioned on the one-to-one rule of the label definition; no parameter fitted by optimisation; the threshold 0.5 was chosen after the pair labels of the labelled days were seen)",
+ "not_a_row_wise_scorer": "the score of a box depends on the other audited boxes of its frame in the same table: E4 needs COMPLETE frames in one table (on test.csv all 362 rows are scored together)",
+ "known_wording_issues_left_unedited_before_the_deadline": [
+  "src/rascar/emulation4.py, docstring: 'TAU = 0.5 was fixed before any effect on average precision was computed' is true only for the AP effect; it was fixed AFTER the labels of the overlapping pairs had been tabulated (results/final_mission/m01_console.txt, 08:59). Not label-free.",
+  "scripts/reproduce_e4.py: the variables loser_tr / loser hold the group flag (names left over from the rejected hard rule; cosmetic).",
+  "tests/test_emulation4.py: the six tests are synthetic; no test pins a real-data result (day APs or the CSV hash).",
+  "The product code of the rejected hard rule no longer exists in src/ (the module was re-created at 09:59:08); the rule is kept in research/final_mission/lead/m02_one2one.py."
+ ],
+ "status": "OPTIONAL second final selection. Checked by the independent red team (Agent Z): the calculations were reproduced, an improvement over E2X is NOT demonstrated. Rejected as the FINAL_BREAKTHROUGH file. Not uploaded.",
+ "wording": "E4 = E2X with its error probabilities conditioned on the one-to-one rule of the label: same-class boxes of a frame with IoU >= 0.5 form a group in which at most one box can be correct. Nothing is trained; the threshold 0.5 was chosen after the pairs of the labelled days had been inspected. E4 is NOT a demonstrated improvement and not the FINAL_BREAKTHROUGH candidate: it is the third variant, defined after the two registered variants (hard rule) were rejected, and the idea was prompted by the Public result of E3. Local differences to E2X: +0.0040 by days, +0.0034 leave-one-frame-out, +0.0035 in frame-grouped folds - all of it on 26 Oct, 73 % from one group of four trays in one frame, 94 % from two groups; without the tray groups about +0.001; trays form no group on the test. Refit bootstrap: P(delta > 0) 0.96, 95 % interval -0.0005 ... +0.0147. On the test 50 of 362 scores change, 6 rows by more than a tenth of the queue. Offered only as an optional second final selection next to E2X; veto fixed before the upload: Public AP below 0.92964 -> the second slot stays E1.",
+ "red_team": "results/final_mission/agent_Z/RED_TEAM.md (final, saved 10:31 local time on 2026-11-14; audit window 10:02-10:31). Rulings: E2X + E1 default pair stands; E4 as EVOLYUTSIYA_CASE1_FINAL_BREAKTHROUGH.csv REJECT; E4 as a second final selection APPROVE AS OPTIONAL WITH CONDITIONS.",
+ "conditions": [
+  "1. Neutral file name (no FINAL, BREAKTHROUGH, BEST, CANDIDATE, ASCENSION), byte-identical to SHA-256 7f4c2569b820b899a4a9dd7621eb662369d2c50bef5e0a9137954667ec9c210a, with .sha256 side file and manifest; the six protected files are not touched.",
+  "2. The manifest and every report that mentions E4 carry the mandatory sentence (field wording); the words forbidden by the red team for E4 are not used.",
+  "3. ONE upload. Whatever the score: no second variant, no other threshold, no blend, no re-selection. E2X stays selected.",
+  "4. src/ is not edited before the deadline (audited hashes are in the field code); the wording issues are recorded here and fixed afterwards.",
+  "5. The corrections of RED_TEAM.md section 8 enter the registry, the fact sheet and the three jury files before hand-off."
+ ],
+ "veto": "Public AP of E4 < 0.92964 (the score of E1, the file it would replace) -> the second slot stays E1. Fixed at 09:01 in the acceptance procedure and confirmed by the red team at 10:31, before any upload. The Public number is used for this one decision only.",
+ "rule": {
+  "kind": "conditioning on at most one correct box per group",
+  "tau": 0.5,
+  "fitted_parameters": 0
+ },
+ "base_model": "e2x_pixel_inner_hires (unchanged; rows outside a group keep the E2X score)",
+ "rows_changed_relative_to_the_E2X_file": 50,
+ "test_rows_in_groups": {
+  "n": 50,
+  "by_class": {
+   "nude_hands": 32,
+   "cup": 16,
+   "person": 2
+  }
+ },
+ "local_validation": {
+  "strict_leave_one_day_out": {
+   "E4": {
+    "2026-10-25": 0.986619935119698,
+    "2026-10-26": 0.9618682299044199,
+    "mean": 0.974244082512059
+   },
+   "E2X": {
+    "2026-10-25": 0.986619935119698,
+    "2026-10-26": 0.9537770428532482,
+    "mean": 0.9701984889864731
+   }
+  },
+  "leave_one_frame_out_delta": {
+   "mean_of_day_AP": 0.003397928001150352,
+   "pooled_AP": 0.004288631690939182
+  },
+  "frame_grouped_5fold_x100_delta": {
+   "delta_mean_of_days": 0.003517410562033889,
+   "sd": 0.0006204267508671993,
+   "share_higher": 1.0,
+   "share_lower": 0.0,
+   "min": 0.0017583813025759953,
+   "delta_pooled": 0.004592908775781525,
+   "share_pooled_higher": 1.0
+  },
+  "paired_frame_bootstrap": {
+   "delta": 0.0042122629479425236,
+   "se": 0.0033494294874621155,
+   "p_gt0": 0.959,
+   "ci_lo": -0.0002472716723090961,
+   "ci_hi": 0.01235130723645384,
+   "PASS": true
+  },
+  "cells_delta": {
+   "pers25": 0.0,
+   "pers26": 0.0025825751982255785,
+   "nude25": 0.0,
+   "nude26": 0.0036155202821870347,
+   "cup25": 0.0,
+   "cup26": 0.0,
+   "tray25": 0.0,
+   "tray26": 0.054805996472663265
+  }
+ },
+ "red_team_replication": {
+  "source": "results/final_mission/agent_Z/RED_TEAM.md, own code of the red team (z02_analysis.py, z03_oofs.py, z04_extra.py)",
+  "strict_leave_one_day_out": {
+   "E2X_25_26_mean": [
+    0.98662,
+    0.95378,
+    0.9702
+   ],
+   "E4_25_26_mean": [
+    0.98662,
+    0.96187,
+    0.97424
+   ],
+   "delta_mean_of_days": 0.00405,
+   "delta_pooled_raw_scores": 0.00542
+  },
+  "leave_one_frame_out_delta": {
+   "mean_of_days": 0.0034,
+   "pooled": 0.00429
+  },
+  "frame_grouped_5fold_x120_seed_4172026": {
+   "delta_mean_of_days": 0.00348,
+   "sd": 0.0007,
+   "higher_in": "120 of 120",
+   "min": 0.0008,
+   "delta_pooled": 0.00449,
+   "by_day": {
+    "25 Oct": -0.0002,
+    "26 Oct": 0.0072
+   }
+  },
+  "agent_Q_folds_seed_73110_x200": {
+   "delta_mean_of_days": 0.00352,
+   "higher_in": "200 of 200",
+   "delta_pooled": 0.00453
+  },
+  "paired_frame_bootstrap_models_fixed_4000": {
+   "p_delta_gt_0": 0.96,
+   "interval_95": [
+    -0.0003,
+    0.013
+   ]
+  },
+  "refit_bootstrap_300": {
+   "mean": 0.005,
+   "sd": 0.004,
+   "p_delta_gt_0": 0.957,
+   "interval_95": [
+    -0.0005,
+    0.0147
+   ],
+   "by_day": {
+    "25 Oct": -0.0001,
+    "26 Oct": 0.0101
+   }
+  },
+  "concentration": {
+   "largest_group": "four trays in frame 26 Oct 11:43:00, three of them errors",
+   "share_of_the_strict_gain_from_the_largest_group": 0.73,
+   "share_from_the_two_largest_groups": 0.94,
+   "groups_contributing_neutral_negative": [
+    4,
+    7,
+    3
+   ],
+   "delta_without_the_largest_group": 0.0011,
+   "delta_without_the_two_largest_groups": 0.0002,
+   "delta_without_tray_groups_strict_lofo_grouped": [
+    0.0012,
+    0.0009,
+    0.0009
+   ],
+   "delta_hand_and_cup_groups_only_strict_lofo_grouped": [
+    0.0017,
+    0.0012,
+    0.0012
+   ],
+   "tray_groups_on_the_test": 0
+  },
+  "sensitivity_strict_delta": {
+   "tau_0.3": 0.0028,
+   "tau_0.4": 0.0054,
+   "tau_0.5": 0.004,
+   "tau_0.6": 0.0041,
+   "tau_0.7": "no group",
+   "e2x_logit_x0.5": 0.0028,
+   "e2x_logit_x2": 0.0045,
+   "e2x_logit_x4": 0.0046,
+   "e2x_logit_x0.25": -0.0117
+  },
+  "calibration": "grouped rows: error rate 0.68, mean score 0.63 before and 0.74 after the update (the update over-corrects their level); recalibration slope of E2X on the labelled days 1.25",
+  "placebo_random_same_class_pairs_with_iou_0": {
+   "strict_mean_delta": -0.0144,
+   "positive_draws": "0 of 3000"
+  },
+  "variants_of_the_idea_scored_against_labels_today": 8,
+  "test_side_label_free": {
+   "rows_changed": 50,
+   "groups": 24,
+   "by_class": {
+    "nude_hands": 32,
+    "cup": 16,
+    "person": 2
+   },
+   "all_changes_upward": true,
+   "spearman_with_e2x": 0.99349,
+   "rows_moving_by_more_than_a_tenth_of_the_queue": 6,
+   "top50_overlap": 43,
+   "top100_overlap": 96
+  },
+  "simulation_on_the_test_configuration_simulated_labels": [
+   {
+    "share_of_groups_where_the_premise_fails": 0.0,
+    "e4_minus_e2x_all_rows": 0.0032,
+    "veto_fires_with_probability": 0.06
+   },
+   {
+    "share_of_groups_where_the_premise_fails": 0.25,
+    "e4_minus_e2x_all_rows": 0.0008,
+    "veto_fires_with_probability": 0.21
+   },
+   {
+    "share_of_groups_where_the_premise_fails": 0.5,
+    "e4_minus_e2x_all_rows": -0.0016,
+    "veto_fires_with_probability": 0.35
+   },
+   {
+    "share_of_groups_where_the_premise_fails": 1.0,
+    "e4_minus_e2x_all_rows": -0.0064,
+    "veto_fires_with_probability": 0.59
+   }
+  ],
+  "gates": "E4: FAIL on 'repeated validation overfitting' for the claim 'improvement over E2X' (inconclusive); NOT VERIFIED on class calibration of the test; PASS on leakage, evaluation, contamination, aggregation, ordering, provenance, formatting, reproducibility",
+  "not_verified": "Kaggle's rule for two selected files (assumed: the better Private score counts); the behaviour of E4 on the test (simulated only); the Public scores themselves",
+  "veto": "Public AP of E4 < 0.92964 -> the second slot stays E1"
+ },
+ "history": "A hard version of the rule (lift the higher-scored box of a group to the top) was registered first and REJECTED (leave-one-frame-out pooled AP below E2X; a correct box lifted in 55 of 100 grouped-fold repetitions with the lead's seed, in 81 of 120 and 133 of 200 with the red team's seeds). This soft version was defined after that rejection (post hoc, third variant, outside the lead's acceptance procedure); eight variants of the idea were scored against the labels on 2026-11-14.",
+ "kaggle": {
+  "uploaded": false,
+  "public_ap": null,
+  "other_public_ap_reported_by_captain": {
+   "E2X": 0.93284,
+   "E1": 0.92964,
+   "03": 0.89976,
+   "E3": 0.89516,
+   "05": 0.89326
+  }
+ },
+ "artifacts": {
+  "results/final_mission/candidate/models/e2x_pixel_inner_hires.joblib": "edc8d92013f410bbb38d04d29adb871607866b60c47e15af9c825bae20c5045d",
+  "results/final_mission/candidate/models/e2x_pixel_inner_hires.json": "403750db33a58aeb55e03e565a801d8e48c5c63855c7611be530c549d2ac6f21"
+ },
+ "code": {
+  "src/rascar/emulation4.py": "a31eb5996c8457cd7276223a111c9d6a0279d32bf328d4ff427cffa36d959840",
+  "src/rascar/emulation2.py": "adcf4f8f553cc40e2e3edb430ced2db4e26613dc14c9d9b24ee91729f6930073",
+  "src/rascar/emulation.py": "9eb1e134d491300aa4aeb5cc4ad54ffdf394ee20749491ffcf6223d96a8b587d",
+  "src/rascar/final_models.py": "099875ca4267a805b78a6f6b5c5c4681dd3fb7009c1be97c8bea3960c7db0780",
+  "scripts/reproduce_e4.py": "d7d99352f305d4c39c3125c29a19e039f5c3e7a559d0e3bf0e4c9322e9e7b4ff",
+  "tests/test_emulation4.py": "5f8b8eff4db1dccd6d8eb0b0c6fb53436421427a7a59b520929eb884e09b05a3"
+ },
+ "reproduce": ".\\.venv\\Scripts\\python.exe -I -X utf8 -B scripts\\reproduce_e4.py --rebuild-features --out <new folder> --compare submissions\\EVOLYUTSIYA_CASE1_E4_OPTIONAL.csv",
+ "byte_identical_regenerations": [
+  "lead run a (results/final_mission/repro_e4_a)",
+  "lead run b (results/final_mission/repro_e4_b)",
+  "red team Agent Z (results/final_mission/agent_Z/repro_e4, 74.8 s)"
+ ],
+ "public_models": {
+  "google/owlv2-base-patch16-ensemble": "https://huggingface.co/google/owlv2-base-patch16-ensemble",
+  "google/owlv2-large-patch14-ensemble": "https://huggingface.co/google/owlv2-large-patch14-ensemble",
+  "IDEA-Research/grounding-dino-tiny": "https://huggingface.co/IDEA-Research/grounding-dino-tiny",
+  "IDEA-Research/grounding-dino-base": "https://huggingface.co/IDEA-Research/grounding-dino-base"
+ },
+ "tests": "tests/test_emulation4.py: 6 passed; full suite: 204 passed (167 s, run by the red team at 10:12 on 2026-11-14, log results/final_mission/agent_Z/pytest_full.log)",
+ "written_local_time": "2026-11-14T10:33:41",
+ "protected_files_unchanged": {
+  "EVOLYUTSIYA_CASE1_E2X_OPTIONAL.csv": "8ab7cb3ec8bff39018ff1063b6544a8b8293c084259c46f06642abf0cc57bdf0",
+  "EVOLYUTSIYA_CASE1_E1_CANDIDATE.csv": "0aab6ce8a0f5a7170cf8b1fc43fcf19e892423cf828674130ba6500c3541cc63",
+  "EVOLYUTSIYA_CASE1_E2_CANDIDATE.csv": "75db6eef0d57b24aca59f8dd89e8917be971850426e83862dd04ca051545021b",
+  "EVOLYUTSIYA_CASE1_E3_OPTIONAL.csv": "0c453099f43a62414a22d045feb56b0514a723295a6ffb10bceab22a8f1f9c37",
+  "EVOLYUTSIYA_CASE1_RANK1_CANDIDATE.csv": "a7b8128a9b54b021fa10c9c888385c67b370ad884b98ebb9834ba9985f6ec309",
+  "EVOLYUTSIYA_CASE1_ROBUST_FALLBACK.csv": "20a75bebd71d1dd964f3548d167b7dcb93c929741f3f3e5451060a4370c645be"
+ },
+ "wording_correction": "2026-11-14 20:15 MSK: one word of the mandatory sentence corrected ('file' -> 'candidate') so that it equals RED_TEAM.md section 5 (iv) word for word (found by the document check, results/final_mission/agent_D/d01_console.txt). Nothing else in this file was changed; the CSV and its SHA-256 are untouched."
+}

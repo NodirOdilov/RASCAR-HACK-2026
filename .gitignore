@@ -1,0 +1,64 @@
+# --- competition data: never published (competition rules: the dataset must not be redistributed) ---
+/data/
+*.jpg
+*.jpeg
+
+# --- third-party model weights (Hugging Face cache) and trained/serialised models ---
+/models/
+*.joblib
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+
+# --- generated outputs: detector caches, feature tables, reproduction runs ---
+/results/
+/checkpoints/
+*.npz
+*.parquet
+
+# --- environments and tool caches ---
+.venv/
+.venv_gpu/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+catboost_info/
+build/
+dist/
+
+# --- secrets and credentials ---
+kaggle.json
+.kaggle/
+.env
+.env.*
+*.pem
+*.key
+secrets*
+credentials*
+
+# --- private working files ---
+prompt.txt
+*MASTER_PROMPT*.md
+TODO_*.md
+RUN_STATE.md
+
+# --- archives and OS / IDE noise ---
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/

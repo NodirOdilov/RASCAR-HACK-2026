@@ -1,0 +1,78 @@
+{
+ "file": "submissions/EVOLYUTSIYA_CASE1_E1_CANDIDATE.csv",
+ "sha256": "0aab6ce8a0f5a7170cf8b1fc43fcf19e892423cf828674130ba6500c3541cc63",
+ "bytes": 10869,
+ "written_local_time": "2026-11-13T18:55:06",
+ "status": "EXPERIMENTAL CANDIDATE - NOT PROMOTED by the pre-registered rule; usable as second final selection only if the captain accepts the documented deviation",
+ "deviation_sentence": "E1 (e1_smooth_pooled) did not pass the pre-registered promotion rule: gate G6 failed on its class-shuffle control (2 of 23 class permutations >= the fitted adapter, p = 0.125 > 0.05). Under the rule as written the final pair stays {03, 05}. The captain selects E1 instead of 05 as the second final file as a documented deviation from that rule, reviewed by the independent auditor. 03 remains selected in every case. The failed control concerns only whether the class-specific adapter values matter - they are not established; a uniform expansion of about 7-10 % performs the same - not leakage, reproducibility or the direction of the effect. E1 is not claimed to be proven better than 03: the local gain is +0.011 mean-of-day AP on 198 labelled rows of two days (paired frame bootstrap P ~ 0.997, not adjusted for the 35 variants examined; the adjusted bar 0.9986 is not reached). Its behaviour under the box convention of the test annotators is unknown.",
+ "captain_decision": "ACCEPTED by action: the captain uploaded E1 and reported Public AP 0.92964 in prompt.txt (2026-11-13 19:16 MSK), naming E1 the new verified benchmark",
+ "kaggle": {
+  "uploaded": true,
+  "uploaded_by": "captain",
+  "public_ap": 0.92964,
+  "veto": "threshold 0.850 passed",
+  "record": "submissions/kaggle_submitted/KAGGLE_RESULT_E1_2026-11-13.json"
+ },
+ "model": {
+  "name": "e1_smooth_pooled",
+  "code": "src/rascar/emulation.py",
+  "pipeline": "scripts/reproduce_breakthrough.py --rebuild-features",
+  "artifacts": {
+   "results/final_continuation/candidate/models/e1_smooth_pooled.joblib": "d1380a3a9688a2ec055d601f1cfea8bebddbd4945bae9ce61407a613a1328e2a",
+   "results/final_continuation/candidate/models/e1_smooth_pooled.json": "11b831819f54d7919a405ba95c8f392ed915ce46a8b5ae070e389200f8e67a09"
+  },
+  "inputs": [
+   "data/raw/rascar-hack-case-1/*.csv",
+   "data/interim/vision/{owlv2,owlv2_fine,gdino,gdino_fine,gdinob,gdinob_fine,owlL,owlL_fine} (cached proposals of public detectors)"
+  ],
+  "public_weights": {
+   "google/owlv2-base-patch16-ensemble": "https://huggingface.co/google/owlv2-base-patch16-ensemble",
+   "google/owlv2-large-patch14-ensemble": "https://huggingface.co/google/owlv2-large-patch14-ensemble",
+   "IDEA-Research/grounding-dino-tiny": "https://huggingface.co/IDEA-Research/grounding-dino-tiny",
+   "IDEA-Research/grounding-dino-base": "https://huggingface.co/IDEA-Research/grounding-dino-base"
+  }
+ },
+ "local_validation_strict_leave_one_day_out": {
+  "E1": {
+   "2026-10-25": 0.984569335276861,
+   "2026-10-26": 0.9461562318238167,
+   "mean": 0.9653627835503389
+  },
+  "03": {
+   "2026-10-25": 0.9774570796586679,
+   "2026-10-26": 0.9315866159824407,
+   "mean": 0.9545218478205544
+  }
+ },
+ "schema_checks": {
+  "columns_id_score": true,
+  "rows_362": true,
+  "ids_unique": true,
+  "ids_equal_sample_submission": true,
+  "same_order_as_sample_submission": true,
+  "ids_equal_test_csv": true,
+  "scores_finite": true,
+  "scores_in_0_1": true,
+  "no_missing": true,
+  "ascii_no_bom_lf_only": true,
+  "spearman_with_03": 0.972753239489564,
+  "distinct_scores": 362,
+  "score_min": 0.0042323547,
+  "score_max": 0.9975607527
+ },
+ "byte_identical_regenerations": [
+  "results/final_breakthrough/repro_e1",
+  "results/final_continuation/repro_e1_check",
+  "results/final_continuation/agent_J/repro"
+ ],
+ "audit": "results/final_continuation/agent_J/AUDIT.md (APPROVE WITH CONDITIONS; no audit gate FAIL)",
+ "decision_document": "research/final_continuation/FINAL_MODEL_SELECTION.md",
+ "protected_files_unchanged": {
+  "EVOLYUTSIYA_CASE1_RANK1_CANDIDATE.csv": "a7b8128a9b54b021fa10c9c888385c67b370ad884b98ebb9834ba9985f6ec309",
+  "EVOLYUTSIYA_CASE1_ROBUST_FALLBACK.csv": "20a75bebd71d1dd964f3548d167b7dcb93c929741f3f3e5451060a4370c645be"
+ },
+ "reserved_names_not_created": [
+  "submissions/EVOLYUTSIYA_CASE1_BREAKTHROUGH_CANDIDATE.csv",
+  "submissions/EVOLYUTSIYA_CASE1_FINAL_BREAKTHROUGH.csv"
+ ]
+}

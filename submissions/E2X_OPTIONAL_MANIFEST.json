@@ -1,0 +1,95 @@
+{
+ "file": "submissions/EVOLYUTSIYA_CASE1_E2X_OPTIONAL.csv",
+ "sha256": "8ab7cb3ec8bff39018ff1063b6544a8b8293c084259c46f06642abf0cc57bdf0",
+ "bytes": 10869,
+ "model": "e2x_pixel_inner_hires",
+ "status": "OPTIONAL second final selection only - NOT the E2 candidate (disclosed deviation, to be decided by the captain)",
+ "wording": "E2X failed the pre-registered E2 rule (2) (within-person AP on 26 Oct 0.8715 vs 0.8807 for E1, -0.0092, tolerance 0.005) and is not the E2 candidate. It is offered only as an optional second final selection next to E1, as a disclosed deviation decided by the captain. Strict leave-one-day-out 0.9702 vs 0.9654 (+0.0048, paired frame bootstrap P 0.998 before any correction for the variants scored on the same 198 rows); under frame-grouped 5-fold the gain is +0.0022, the same as E2's.",
+ "ingredients": [
+  "finer views (384 px tiles) for hands and cups",
+  "proposals that reach or cross an interior border of their own view removed (16.6 % of E1's base pool, 31.6 % of the tile pool)",
+  "class-free margin in pixels: 1.63 px + 1.01 % of the width, 1.73 px + 0.94 % of the height per side"
+ ],
+ "local_validation_strict_leave_one_day_out": {
+  "E2X": {
+   "2026-10-25": 0.986619935119698,
+   "2026-10-26": 0.9537770428532482,
+   "mean": 0.9701984889864731
+  },
+  "E1": {
+   "2026-10-25": 0.984569335276861,
+   "2026-10-26": 0.9461562318238167,
+   "mean": 0.9653627835503389
+  }
+ },
+ "known_weak_points": [
+  "within-person AP on 26 Oct -0.0092 (P(E2X < E1) 0.83)",
+  "rows with confidence >= 0.85: 0.785 vs 0.793 for E1",
+  "gain halves if the margin intercepts are 0.5 px smaller",
+  "amendment A1 of the lead was not ratified by the red team (it had no effect on the delivered E2 file)"
+ ],
+ "test_side_label_free": {
+  "spearman_with_E1": 0.99075,
+  "top100_class_counts_person_hands_cup_tray": [
+   10,
+   62,
+   19,
+   9
+  ]
+ },
+ "artifacts": {
+  "results/e2_breakthrough/candidate/models/e2x_pixel_inner_hires.joblib": "edc8d92013f410bbb38d04d29adb871607866b60c47e15af9c825bae20c5045d",
+  "results/e2_breakthrough/candidate/models/e2x_pixel_inner_hires.json": "403750db33a58aeb55e03e565a801d8e48c5c63855c7611be530c549d2ac6f21"
+ },
+ "reproduce": ".\\.venv\\Scripts\\python.exe -I -X utf8 -B scripts\\reproduce_e2.py --rebuild-features --config e2x_pixel_inner_hires --out <new folder> --compare submissions\\EVOLYUTSIYA_CASE1_E2X_OPTIONAL.csv",
+ "byte_identical_regenerations": [
+  "lead run a",
+  "lead run b",
+  "red team run (results/e2_breakthrough/agent_K/repro_*)"
+ ],
+ "written_local_time": "2026-11-13T20:32:50",
+ "kaggle": {
+  "uploaded": false,
+  "public_ap": null
+ },
+ "protected_files_unchanged": {
+  "EVOLYUTSIYA_CASE1_E1_CANDIDATE.csv": "0aab6ce8a0f5a7170cf8b1fc43fcf19e892423cf828674130ba6500c3541cc63",
+  "EVOLYUTSIYA_CASE1_RANK1_CANDIDATE.csv": "a7b8128a9b54b021fa10c9c888385c67b370ad884b98ebb9834ba9985f6ec309",
+  "EVOLYUTSIYA_CASE1_ROBUST_FALLBACK.csv": "20a75bebd71d1dd964f3548d167b7dcb93c929741f3f3e5451060a4370c645be"
+ },
+ "code": {
+  "module": "src/rascar/emulation2.py",
+  "module_sha256": "adcf4f8f553cc40e2e3edb430ced2db4e26613dc14c9d9b24ee91729f6930073",
+  "base_module_sha256": "9eb1e134d491300aa4aeb5cc4ad54ffdf394ee20749491ffcf6223d96a8b587d",
+  "pipeline": "scripts/reproduce_e2.py",
+  "pipeline_sha256": "8b301a722750b05bc6d177e144838c56230e0f5a219d2db56cbf51c634fb77d1",
+  "tests": "tests/test_emulation2.py (full suite 193 passed, 20:11 MSK)"
+ },
+ "inputs": [
+  "data/raw/rascar-hack-case-1/*.csv",
+  "data/interim/vision/{owlv2,owlv2_fine,gdino,gdino_fine,gdinob,gdinob_fine,owlL,owlL_fine} (E1's proposal caches)",
+  "results/final_breakthrough/agent_G/cache/{owlv2,gdino,gdinob,owlL}_hires (384 px tiles; fingerprint below)"
+ ],
+ "hires_cache_fingerprint": {
+  "files": 484,
+  "total_bytes": 955448618,
+  "sha256_of_listing": "56c3fddcfb85ece8cecc4af3c7bc0370b5af70a16305f5476b99930068836d24",
+  "regenerate": ".venv_gpu\\Scripts\\python.exe -I -X utf8 research\\final_breakthrough\\agent_G\\g01_cache_gpu.py --model <gdinob|gdino|owlL|owlv2> --views hires   (GPU, 10-17 min per model for the 121 frames; weights already in models/hf_cache)",
+  "full_listing": "results/e2_breakthrough/candidate/HIRES_CACHE_FINGERPRINT.json"
+ },
+ "public_weights": {
+  "google/owlv2-base-patch16-ensemble": "https://huggingface.co/google/owlv2-base-patch16-ensemble",
+  "google/owlv2-large-patch14-ensemble": "https://huggingface.co/google/owlv2-large-patch14-ensemble",
+  "IDEA-Research/grounding-dino-tiny": "https://huggingface.co/IDEA-Research/grounding-dino-tiny",
+  "IDEA-Research/grounding-dino-base": "https://huggingface.co/IDEA-Research/grounding-dino-base"
+ },
+ "red_team": "results/e2_breakthrough/agent_K/RED_TEAM.md",
+ "decision_document": "research/e2_breakthrough/FINAL_E2_VERDICT.md",
+ "rules_for_use": [
+  "E1 stays a final selection in every case",
+  "the captain writes down the choice of the second file before the upload and before any Public score of E2 or E2X is read",
+  "no Public number is used to choose between E1 and its variants",
+  "veto only: if the Public AP of the second file is below 0.915 (E1's 0.92964 - 0.015), the second slot returns to 03 (EVOLYUTSIYA_CASE1_RANK1_CANDIDATE.csv)"
+ ],
+ "selection_statement": "64 variants were scored against the 198 labelled rows in this mission (research/e2_breakthrough/E2_EXPERIMENT_RESULTS.csv), 108 more earlier on 13 Nov, plus the red team's 9 robustness evaluations of E2X which selected nothing"
+}
